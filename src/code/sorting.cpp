@@ -34,7 +34,7 @@ void display_array(sf::RenderWindow& window){
 void bubble_sort(sf::RenderWindow& window){
     for (int i = 0; i < NUM_BARS - 1; i++){
         for (int j = 0; j < NUM_BARS - i - 1; j++){
-            if (array[j] > array[i]){
+            if (array[j] > array[j + 1]){
                 std::swap(array[j], array[j + 1]);
                 display_array(window);
                 std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -57,5 +57,6 @@ int main(){
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+    }
     return 0;
-}}
+}

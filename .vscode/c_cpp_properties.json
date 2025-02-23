@@ -4,7 +4,8 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/Users/benedekkaibas/Downloads/SFML-2.5.1/include"
+                "/usr/local/include",
+                "/usr/local/opt/sfml@2/include"
             ],
             "defines": [],
             "macFrameworkPath": [
