@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <thread>
 #include <chrono>
+#include <iostream>
 
 //using namespace std;
 
@@ -43,13 +44,55 @@ void bubble_sort(sf::RenderWindow& window){
     }
 }
 
+int partition(std::vector<int>& nums, int low, int high) {
+    int pivot = nums[high]; // Choosing the last element as pivot
+    int i = low - 1; // Index of smaller element
+
+    for (int j = low; j < high; j++) {
+        // If current element is smaller than or equal to pivot
+        if (nums[j] <= pivot) {
+            i++; // Increment index of smaller element
+            std::swap(nums[i], nums[j]);
+        }
+    }
+    std::swap(nums[i + 1], nums[high]);
+    return i + 1;
+}
+
+void quickSort(sf::RenderWindow& window, std::vector<int>& nums, int low, int high) {
+    if (low < high) {
+        // Partitioning index
+        int pi = partition(nums, low, high);
+
+        // Recursively sort elements before and after partition
+        quickSort(window, nums, low, pi - 1);
+        quickSort(window, nums, pi + 1, high);
+
+        // Display the array after each partition
+        display_array(window);
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    }
+}
+
 int main(){
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Sorting Visualizer in C++");
     generate_array();
     display_array(window);
 
-    std::thread sortingThread(bubble_sort, std::ref(window));
-    sortingThread.join();
+    int choice;
+    std::cout << "Choose sorting algorithm: 1 for Bubble Sort, 2 for Quick Sort: ";
+    std::cin >> choice;
+
+    if (choice == 1) {
+        std::thread sortingThread(bubble_sort, std::ref(window));
+        sortingThread.join();
+    } else if (choice == 2) {
+        std::thread sortingThread(quickSort, std::ref(window), std::ref(array), 0, NUM_BARS - 1);
+        sortingThread.join();
+    } else {
+        std::cout << "Invalid choice!" << std::endl;
+        return 1;
+    }
 
     while (window.isOpen()) {
         sf::Event event;

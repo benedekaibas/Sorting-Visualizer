@@ -49,6 +49,14 @@
         "iterator": "cpp",
         "memory_resource": "cpp",
         "utility": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "__mutex_base": "cpp",
+        "__node_handle": "cpp",
+        "ios": "cpp",
+        "istream": "cpp",
+        "streambuf": "cpp",
+        "thread": "cpp",
+        "filesystem": "cpp",
+        "stop_token": "cpp"
     }
 }
