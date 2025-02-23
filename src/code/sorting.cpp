@@ -48,5 +48,14 @@ int main(){
     generate_array();
     display_array(window);
 
+    std::thread sortingThread(bubble_sort, std::ref(window));
+    sortingThread.join();
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
     return 0;
 }
