@@ -45,13 +45,12 @@ void bubble_sort(sf::RenderWindow& window){
 }
 
 int partition(std::vector<int>& nums, int low, int high) {
-    int pivot = nums[high]; // Choosing the last element as pivot
-    int i = low - 1; // Index of smaller element
+    int pivot = nums[high];
+    int i = low - 1;
 
     for (int j = low; j < high; j++) {
-        // If current element is smaller than or equal to pivot
         if (nums[j] <= pivot) {
-            i++; // Increment index of smaller element
+            i++;
             std::swap(nums[i], nums[j]);
         }
     }
@@ -61,14 +60,11 @@ int partition(std::vector<int>& nums, int low, int high) {
 
 void quickSort(sf::RenderWindow& window, std::vector<int>& nums, int low, int high) {
     if (low < high) {
-        // Partitioning index
         int pi = partition(nums, low, high);
 
-        // Recursively sort elements before and after partition
         quickSort(window, nums, low, pi - 1);
         quickSort(window, nums, pi + 1, high);
 
-        // Display the array after each partition
         display_array(window);
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
